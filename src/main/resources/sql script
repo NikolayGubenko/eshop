@@ -1,0 +1,11 @@
+use eshopDb;
+
+insert into roles (name)values ('ADMIN'),('USER');
+
+insert into users (email, first_name, last_name, password)values
+('a@a.com','Alexey','Petrov','$2a$12$WRsa6exBj21poSTwC2s8zOi5ujlIwY.3NrxBGg30YTC4kHsRQa9/O'),
+('b@b.com','Ivan','Ivanov','$2a$12$yTNASo552FJCmlUZbvJWEOWw70WYGveSShYOHV6.xNFG6xXD56pOG');
+
+insert into user_role(user_id, role_id)values
+(1,1),
+(2,2);
