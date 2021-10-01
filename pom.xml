@@ -12,7 +12,7 @@
     <artifactId>eshop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eshop</name>
-    <description>eshop</description>
+    <description>Online shop example</description>
     <properties>
         <java.version>11</java.version>
     </properties>
