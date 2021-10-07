@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+                      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/css/ui.jqgrid.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/js/jquery.jqgrid.min.js"></script>
+    <script src="/js/order.js"></script>
+    <script src="/js/product.js"></script>
+    <script src="/js/table.js"></script>
+    <title>Eshop</title>
+    <style>
+        body {
+            line-height: 2.1;
+            font-size: 20px;
+        }
+
+        .ui-jqgrid > {
+
+            font-size: 15px !important;
+
+        }
+
+        .ui-jqgrid tr.jqgrow td {
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: pre-wrap;
+            white-space: -o-pre-wrap;
+            overflow: hidden;
+            height: auto;
+            vertical-align: middle;
+            padding-top: 3px;
+            padding-bottom: 3px
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="padding:10px;width:100%;float: left;">
+    <h2 id="usrName">[[${#httpServletRequest.remoteUser}]], welcome!</h2>
+    <h2>Your orders</h2>
+    <div id="header"></div>
+    <table id="orders" class="display">
+    </table>
+    <div id="pager2"></div>
+
+    <input type="button" value="View and edit" onclick="getOrderToEdit()"/>&nbsp;&nbsp;
+    <input onclick="deleteOrder()" id="deleteOrder" type="button" value="Delete order"/>&nbsp;
+    <input onclick="createOrder()" id="createOrder" type="button" value="Create order"/>
+
+</div>
+<div id=orderProductsPanel class="container" style="padding:10px;width:90%" hidden="false">
+    <h3>Order Details</h3>
+    <table id="orderDetails" class="display">
+    </table>
+
+    <input onclick="deleteButtonEvent()" id="deleteProduct" type="button" value="Delete product"/>&nbsp;
+    <select id="productList" name="productList"></select>
+    <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
+    <input onclick="addProduct()" id="addProduct" type="button" value="Add product"/>&nbsp;
+    <input onclick="hideDetailsPanel()" id="hideDetails" type="button" value="Hide details"/>
+    <div id="footer"></div>
+</div>
+<br/><br/>
+<br/><br/>
+</body>
+</html>
