@@ -2,7 +2,6 @@ package com.example.eshop.entity;
 
 
 import com.example.eshop.enumeration.OrderStatus;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,11 +23,10 @@ public class Order {
     private long id;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @Column(name = "date")
-    private LocalDateTime date;
+    private LocalDateTime orderDate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
