@@ -8,10 +8,11 @@ public interface OrderService {
 
     List<Order> getAllOrders();
 
-    List<Order> getAllUserOrders(String userName) throws Exception;
+    List<Order> getAllUserOrders(long userId) throws Exception;
 
-    void addNewOrder(Order order, String userName);
+    void addNewOrder(Order order) throws Exception;
 
-    void updateOrder(Order updatedOrder, String userName) throws Exception;
+    void updateOrder(Order updatedOrder, long orderId) throws Exception;
 
+    void deleteOrder(long id);
 }

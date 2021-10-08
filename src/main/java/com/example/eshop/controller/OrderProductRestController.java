@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,7 +19,7 @@ public class OrderProductRestController {
     private final OrderProductService orderProductService;
 
     @GetMapping("/order-products/{id}")
-    public List<OrderProductDTO> findProductInOrders(@PathVariable Long id) {
+    public Set<OrderProductDTO> findProductInOrders(@PathVariable Long id) {
         return orderProductMapper.toOrderProductDTO(this.orderProductService.getProductsInOrder(id));
     }
 

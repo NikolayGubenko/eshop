@@ -2,12 +2,11 @@ package com.example.eshop.controller;
 
 import com.example.eshop.dto.NewOrderDTO;
 import com.example.eshop.dto.OrderDTO;
-import com.example.eshop.entity.Order;
 import com.example.eshop.mapper.OrderMapper;
+import com.example.eshop.model.CustomUserDetails;
 import com.example.eshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,14 +26,25 @@ public class OrderRestController {
     }
 
     @GetMapping
-    public List<OrderDTO> findAllUserOrders(@AuthenticationPrincipal UserDetails userDetails) throws Exception {
-        return this.orderMapper.toOrderDTOList(this.orderService.getAllUserOrders(userDetails.getUsername()));
+    public List<OrderDTO> findAllUserOrders(@AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
+        return this.orderMapper.toOrderDTOList(this.orderService.getAllUserOrders(customUserDetails.getId()));
     }
 
-    @PutMapping
-    public NewOrderDTO updateOrder(@AuthenticationPrincipal UserDetails userDetails, NewOrderDTO updatedOrder) throws Exception {
-        this.orderService.updateOrder(this.orderMapper.toOrder(updatedOrder),userDetails.getUsername());
+    @PostMapping
+    public NewOrderDTO addNewOrder(@RequestBody NewOrderDTO saveOrder) throws Exception {
+        this.orderService.addNewOrder(this.orderMapper.toOrder(saveOrder));
+        return saveOrder;
+    }
+
+    @PutMapping("/{id}")
+    public NewOrderDTO updateOrder(@PathVariable long id, @RequestBody NewOrderDTO updatedOrder) throws Exception {
+        this.orderService.updateOrder(this.orderMapper.toOrder(updatedOrder), id);
         return updatedOrder;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOrder(@PathVariable long id){
+        this.orderService.deleteOrder(id);
     }
 
 }

@@ -13,10 +13,13 @@ function deleteProductFromOrder(id) {
 
 function addOrderProduct(){
 
-    var griddata = $("#orderDetails").jqGrid().getRowData();
-    var dataToSend = JSON.stringify(griddata);
+    var dataIDs = $("#orderDetails").getDataIDs();
+    for(i = 0; i < dataIDs.length; i++)
+    {
+        var rowData = $("#orderDetails").jqGrid ('getRowData', dataIDs[i]);
 
-    alert(griddata.id);
+        alert(JSON.stringify(rowData));
+    }
 
 }
 

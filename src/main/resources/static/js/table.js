@@ -76,7 +76,6 @@ function getOrderDetails(id) {
         viewrecords: true,
         sortorder: "desc",
         caption: "Order details",
-        multiselect: false,
     });
 
 }
