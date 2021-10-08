@@ -42,7 +42,8 @@ public class OrderServiceImpl implements OrderService {
 
 
         tmpOrder.getOrderProducts().clear();
-        tmpOrder.setOrderProducts(updatedOrder.getOrderProducts());
+        tmpOrder.getOrderProducts().addAll(updatedOrder.getOrderProducts());
+        //tmpOrder.setOrderProducts(updatedOrder.getOrderProducts());
         tmpOrder.getOrderProducts().forEach((OrderProduct) -> OrderProduct.setOrder(updatedOrder));
         this.orderRepository.save(tmpOrder);
     }
