@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class OrderProductDTO {
 
+    private long id;
+
     private Product product;
 
     //private Order order;

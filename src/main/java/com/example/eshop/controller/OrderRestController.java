@@ -30,6 +30,11 @@ public class OrderRestController {
         return this.orderMapper.toOrderDTOList(this.orderService.getAllUserOrders(customUserDetails.getId()));
     }
 
+    @GetMapping ("/{id}")
+    public OrderDTO getOrderDetails(@PathVariable long id) throws Exception {
+      return this.orderMapper.toOrderDTO(this.orderService.getOrderDetails(id));
+    }
+
     @PostMapping
     public NewOrderDTO addNewOrder(@RequestBody NewOrderDTO saveOrder) throws Exception {
         this.orderService.addNewOrder(this.orderMapper.toOrder(saveOrder));

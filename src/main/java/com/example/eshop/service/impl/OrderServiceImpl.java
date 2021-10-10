@@ -27,6 +27,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order getOrderDetails(long orderId) throws NotFoundException {
+        return this.orderRepository.findById(orderId).orElseThrow(()->new NotFoundException("Order not found"));
+    }
+
+    @Override
     public void addNewOrder(Order order) {
 
         order.setOrderDate(LocalDateTime.now());

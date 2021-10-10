@@ -63,9 +63,9 @@ function getOrderDetails(id) {
         colNames: ['id', 'Product name', 'Product price', 'Product type', "Quantity"],
         colModel: [
             {name: 'id', index: 'id', width: 20},
-            {name: 'product.name', index: 'product.name', width: 200},
-            {name: 'product.price', index: 'product.price', width: 175},
-            {name: 'product.productType', index: 'product.productType', width: 100},
+            {name: 'product.name', index: 'name', width: 200},
+            {name: 'product.price', index: 'price', width: 175},
+            {name: 'product.productType', index: 'productType', width: 100},
             {name: 'quantity', index: 'quantity', width: 300},
         ],
 

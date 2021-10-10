@@ -13,13 +13,23 @@ function deleteProductFromOrder(id) {
 
 function addOrderProduct(){
 
-    var dataIDs = $("#orderDetails").getDataIDs();
+    var rows= jQuery("#orderDetails").jqGrid('getRowData');
+    var paras=new Array();
+    for(var i=0;i<rows.length;i++){
+        var row=rows[i]['product.productType']+':adada';
+        alert(JSON.stringify(row))
+    }
+    //alert(JSON.stringify(paras));
+    /*var dataIDs = $("#orderDetails").getDataIDs();
     for(i = 0; i < dataIDs.length; i++)
     {
-        var rowData = $("#orderDetails").jqGrid ('getRowData', dataIDs[i]);
+        var rowData = $("#orderDetails").jqGrid ('getRowData', dataIDs[i],'Product type');
+        //var a=rowData.productType;
 
-        alert(JSON.stringify(rowData));
-    }
+
+        alert (rowData.product.toString());
+       // alert(JSON.stringify(a));
+    }*/
 
 }
 
