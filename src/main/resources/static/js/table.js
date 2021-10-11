@@ -1,19 +1,32 @@
+/*loadonce: true,
+    jsonReader: {
+    repeatitems: false,
+        root: function (obj) { return obj; },
+    page: function (obj) { return grid.jqGrid('getGridParam', 'page'); },
+    total: function (obj) { return Math.ceil(obj.length / grid.jqGrid('getGridParam', 'rowNum')); },
+    records: function (obj) { return obj.length; }
+},
+pager: "#page",*/
+
 $(document).ready(function () {
     $("#orders").jqGrid({
         url: 'http://localhost:8080/api/v1/orders',
         type: 'GET',
         datatype: "json",
+        gridview: true,
+        autoencode: true,
+        page:0,
         jsonReader: {
-            id: 'id',
+
             repeatitems: false,
             root: function (obj) {
                 return obj;
             },
             page: function (obj) {
-                return 1;
+                return $("#orders").jqGrid('getGridParam', 'page');
             },
             total: function (obj) {
-                return 1;
+                return Math.ceil(obj.length / $("#orders").jqGrid('getGridParam', 'rowNum'));
             },
             records: function (obj) {
                 return obj.length;
@@ -28,7 +41,7 @@ $(document).ready(function () {
             {name: 'description', index: 'description', width: 100},
             {name: 'postalOffice.name', index: 'postalOffice.name', width: 300},
         ],
-        loadonce: false,
+        loadonce: true,
         rowList: [5, 10],
         pager: '#pager2',
         sortname: 'name',
@@ -60,9 +73,9 @@ function getOrderDetails(id) {
                 return obj.length;
             },
         },
-        colNames: ['id', 'Product name', 'Product price', 'Product type', "Quantity"],
+        colNames: ['Product id','Product name', 'Product price', 'Product type', "Quantity"],
         colModel: [
-            {name: 'id', index: 'id', width: 20},
+            {name: 'product.id', index: 'product.id', width: 200},
             {name: 'product.name', index: 'name', width: 200},
             {name: 'product.price', index: 'price', width: 175},
             {name: 'product.productType', index: 'productType', width: 100},

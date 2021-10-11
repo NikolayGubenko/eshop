@@ -18,6 +18,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return this.productRepository.findAll();
+    }
+
+    @Override
+    public Product getProduct(long productId) {
+        return this.productRepository.getById(productId);
     }
 }

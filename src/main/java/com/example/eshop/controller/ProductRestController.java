@@ -4,9 +4,7 @@ import com.example.eshop.dto.ProductDTO;
 import com.example.eshop.mapper.ProductMapper;
 import com.example.eshop.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +19,12 @@ public class ProductRestController {
 
     @GetMapping
     public List<ProductDTO> findAllProducts() {
-        return productMapper.toProductDTOList(productService.getAllProducts());
+        return this.productMapper.toProductDTOList(productService.getAllProducts());
+    }
+
+    @GetMapping("/{id}")
+    public ProductDTO findProduct(@PathVariable long id) {
+        return this.productMapper.toProductDTO(productService.getProduct(id));
     }
 
 }

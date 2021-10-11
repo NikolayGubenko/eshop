@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-                      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
     <meta charset="UTF-8">
@@ -42,6 +43,7 @@
 <body>
 <div class="container" style="padding:10px;width:100%;float: left;">
     <h2 id="usrName">[[${#httpServletRequest.remoteUser}]], welcome!</h2>
+    <h5> <p>Click <a th:href="@{/logout}">here</a> to log out.</p></h5>
     <h2>Your orders</h2>
     <div id="header"></div>
     <table id="orders" class="display">
@@ -58,11 +60,15 @@
     <table id="orderDetails" class="display">
     </table>
 
-    <input onclick="deleteButtonEvent()" id="deleteProduct" type="button" value="Delete product"/>&nbsp;
-    <select id="productList" name="productList"></select>
+    <input onclick="deleteProductFromOrder()" id="deleteProduct" type="button" value="Delete product"/>&nbsp;
+    <select id="productList"></select>
     <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
     <input onclick="addProduct()" id="addProduct" type="button" value="Add product"/>&nbsp;
+    <input onclick="updateOrder()" id="update" type="button" value="Update order"/>&nbsp;
     <input onclick="hideDetailsPanel()" id="hideDetails" type="button" value="Hide details"/>
+    <br/><br/>
+    <input id="productPrice" type="text" name="productPrice" readonly="readonly">
+
     <div id="footer"></div>
 </div>
 <br/><br/>

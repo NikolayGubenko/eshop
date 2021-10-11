@@ -11,8 +11,6 @@ public interface ProductMapper {
 
     List<ProductDTO> toProductDTOList(List<Product> products);
 
-    Product toProductDTO (Product product);
-
-
+    ProductDTO toProductDTO (Product product);
 
 }

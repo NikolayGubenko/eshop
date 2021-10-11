@@ -19,8 +19,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;
 
-    public WebSecurityConfig(UserRepository userRepository) {
+    private final AuthHandler authHandler;
+
+    public WebSecurityConfig(UserRepository userRepository, AuthHandler authHandler) {
         this.userRepository = userRepository;
+        this.authHandler = authHandler;
     }
 
     @Bean
@@ -34,10 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/login").permitAll()
+                .antMatchers("/index").access("hasRole('ROLE_USER')")
+                .antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .successHandler(authHandler)
                 .permitAll()
                 .and()
                 .logout()
