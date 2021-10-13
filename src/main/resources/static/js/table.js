@@ -1,13 +1,3 @@
-/*loadonce: true,
-    jsonReader: {
-    repeatitems: false,
-        root: function (obj) { return obj; },
-    page: function (obj) { return grid.jqGrid('getGridParam', 'page'); },
-    total: function (obj) { return Math.ceil(obj.length / grid.jqGrid('getGridParam', 'rowNum')); },
-    records: function (obj) { return obj.length; }
-},
-pager: "#page",*/
-
 $(document).ready(function () {
     $("#orders").jqGrid({
         url: 'http://localhost:8080/api/v1/orders',

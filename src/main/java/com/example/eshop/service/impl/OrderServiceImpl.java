@@ -6,8 +6,6 @@ import com.example.eshop.repository.UserRepository;
 import com.example.eshop.service.OrderService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,11 +18,6 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     private final UserRepository userRepository;
-
-    @Override
-    public Page<Order> getAllOrders(Pageable pageable) {
-        return orderRepository.findAll(pageable);
-    }
 
     @Override
     public List<Order> getAllUserOrders(long userId) {

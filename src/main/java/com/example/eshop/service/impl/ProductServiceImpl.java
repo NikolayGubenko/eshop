@@ -3,26 +3,47 @@ package com.example.eshop.service.impl;
 import com.example.eshop.entity.Product;
 import com.example.eshop.repository.ProductRepository;
 import com.example.eshop.service.ProductService;
+import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
     @Override
-    public List<Product> getAllProducts() {
-        return this.productRepository.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 
     @Override
     public Product getProduct(long productId) {
         return this.productRepository.getById(productId);
+    }
+
+    @Override
+    public void saveProduct(Product product) {
+        this.productRepository.save(product);
+    }
+
+    @Override
+    public void updateProduct(Product product, long productId) throws NotFoundException {
+        Product updatedProduct  = this.productRepository.findById(product.getId()).orElseThrow(()
+                -> new NotFoundException("Product not found"));
+
+        updatedProduct.setName(product.getName());
+        updatedProduct.setPrice(product.getPrice());
+        updatedProduct.setProductType(product.getProductType());
+
+        this.productRepository.save(updatedProduct);
+    }
+
+    @Override
+    public void deleteProduct(long productId) {
+        this.productRepository.deleteById(productId);
     }
 }

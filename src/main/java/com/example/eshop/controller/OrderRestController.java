@@ -25,14 +25,6 @@ public class OrderRestController {
 
     private final OrderMapper orderMapper;
 
-    @GetMapping("/all")
-    public Page<OrderDTO> findAllOrders(Pageable pageable) {
-
-        Page<Order> pageOrders = orderService.getAllOrders(pageable);
-        List<OrderDTO> orderDTOList = orderMapper.toOrderDTOList(pageOrders.getContent());
-        return new PageImpl<>(orderDTOList, pageable, pageOrders.getTotalElements());
-    }
-
     @GetMapping
     public List<OrderDTO> findAllUserOrders(@AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
         return this.orderMapper.toOrderDTOList(this.orderService.getAllUserOrders(customUserDetails.getId()));

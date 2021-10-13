@@ -2,13 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin page!</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/css/ui.jqgrid.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/js/jquery.jqgrid.min.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/admin.js"></script>
+    <title>Admin page</title>
+    <style>
+        body {
+            line-height: 2.1;
+            font-size: 20px;
+        }
+
+        .ui-jqgrid > {
+
+            font-size: 15px !important;
+
+        }
+
+        .ui-jqgrid tr.jqgrow td {
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: pre-wrap;
+            white-space: -o-pre-wrap;
+            overflow: hidden;
+            height: auto;
+            vertical-align: middle;
+            padding-top: 3px;
+            padding-bottom: 3px
+        }
+    </style>
 </head>
 <body>
 
-<h1>Admin page!</h1>
+<h2>Admin page</h2>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Log out"/>
 </form>
+</br>
+<div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'orders')" id="defaultOpen">Orders</button>
+    <button class="tablinks" onclick="openTab(event, 'products')">Products</button>
+    <button class="tablinks" onclick="openTab(event, 'postal')">Postal offices</button>
+</div>
+
+<div id="orders" class="tabcontent">
+
+    <table id="allOrders" class="display">
+    </table>
+    <div id="ordersPager"></div>
+    <input onclick="getOrderStats()" id="orderStatsButton" type="button" value="Get order properties"/>&nbsp;
+
+    <div id=editOrderPanel class="container" style="padding:10px;width:90%" hidden="true">
+        <table id="orderProducts" class="display">
+        </table>
+
+        <label>Order id: </label><label id="orderId"></label>
+        </br>
+        <label>Order date: </label><label id="orderDate"></label>
+        <div>
+            <label>Order status <select id="orderStatus">>
+                <option value="NEW">NEW</option>
+                <option value="PROCESSING">PROCESSING</option>
+                <option value="SENT">SENT</option>
+                <option value="DELIVERED">DELIVERED</option>
+                <option value="CANCELLED">CANCELLED</option>
+            </select></label>
+        </div>
+        <div>
+            <label>Order active property <select id="orderActive">>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select></label>
+        </div>
+        <input onclick="updateOrderStats()" id="orderUpdateButton" type="button" value="Update order"/>&nbsp;
+    </div>
+</div>
+
+<div id="products" class="tabcontent">
+
+    <table id="allProducts" class="display">
+    </table>
+
+    <input onclick="addProduct()" id="addProduct" type="button" value="Add"/>&nbsp;
+    <input onclick="editProduct()" id="editProduct" type="button" value="Edit"/>&nbsp;
+    <input onclick="deleteProduct()" id="deleteProduct" type="button" value="Delete"/>
+
+    <div id=editProductPanel class="container" style="padding:10px;width:90%" hidden="true">
+
+        <div>
+            <div><label>Product id: </label><label id="productId"></label></div>
+            <label> Product name : <input id="productName" type="text" name="productName"/> </label>
+            <label> Product price : <input id="productPrice" type="number" min="0" max="100000" step="100" value="0"
+                                           size="6" name="productPrice"></label>
+
+            <label>Product type <select id="productType">>
+                <option value="CPU">CPU</option>
+                <option value="GPU">GPU</option>
+                <option value="HDD">HDD</option>
+                <option value="SSD">SSD</option>
+                <option value="RAM">RAM</option>
+            </select></label>
+
+            <input onclick="saveProduct()" id="saveProduct" type="button" value="Save"/>
+        </div>
+    </div>
+</div>
+<div id="postal" class="tabcontent">
+
+    <table id="allPostal" class="display">
+    </table>
+
+    <input onclick="addPostal()" id="addPostal" type="button" value="Add"/>&nbsp;
+    <input onclick="editPostal()" id="editPostal" type="button" value="Edit"/>&nbsp;
+    <input onclick="deletePostal()" id="deletePostal" type="button" value="Delete"/>
+
+    <div id=editPostalPanel class="container" style="padding:10px;width:90%" hidden="true">
+
+        <div>
+            <div><label>Postal office id: </label><label id="postalId"></label></div>
+            <label> Postal office name : <input id="postalName" type="text" name="postalName"/> </label>
+            <label> Postal office address : <input id="postalAddress" type="text" name="postalAddress"></label>
+
+            <input onclick="savePostal()" id="savePostal" type="button" value="Save"/>
+        </div>
+    </div>
+
+</div>
 </body>
+<script>
+    document.getElementById("defaultOpen").click();
+</script>
 </html>
