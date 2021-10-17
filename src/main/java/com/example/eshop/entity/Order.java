@@ -1,13 +1,11 @@
 package com.example.eshop.entity;
 
 
-import com.example.eshop.enumeration.OrderStatus;
+import com.example.eshop.entity.enums.OrderStatus;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @EqualsAndHashCode

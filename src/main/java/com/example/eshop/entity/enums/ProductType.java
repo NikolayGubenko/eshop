@@ -1,4 +1,4 @@
-package com.example.eshop.enumeration;
+package com.example.eshop.entity.enums;
 
 public enum ProductType {
     CPU, GPU, HDD, SSD, RAM
