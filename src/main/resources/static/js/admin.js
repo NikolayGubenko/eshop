@@ -3,12 +3,15 @@ $(document).ready(function () {
         url: 'http://localhost:8080/api/v1/admin/products',
         datatype: "json",
         type: 'GET',
-        page:0,
         jsonReader: {
 
             root: "content",
             page: "page",
-            total: "total",
+            total: function(result) {
+                //Total number of pages
+                return Math.ceil(result.total / result.records)+1;
+            },
+            //total: "total",
             records: "records",
             repeatitems: false,
             cell: "cell",
@@ -22,9 +25,9 @@ $(document).ready(function () {
             {name: 'productType', index: 'productType', width: 100},
         ],
 
-        rowNum:3,
+        rowNum:5,
         loadonce: false,
-        rowList: [5, 10],
+       // rowList: [5, 10],
         pager: '#mypager',
         pageable: true,
         serverPaging: true,

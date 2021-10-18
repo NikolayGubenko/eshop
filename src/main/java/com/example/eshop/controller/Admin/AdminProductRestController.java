@@ -25,16 +25,16 @@ public class AdminProductRestController {
     private final ProductMapper productMapper;
 
     @GetMapping
-    public Map<String, Object> findAllProducts(@RequestParam(defaultValue = "0") int page,
+    public Map<String, Object> findAllProducts(@RequestParam(defaultValue = "1") int page,
                                                @RequestParam(defaultValue = "5") int rows) {
-        Pageable paging = PageRequest.of(page, rows);
+        Pageable paging = PageRequest.of(page-1, rows);
         Page<Product> pageProducts = productService.getAllProducts(paging);
         List<ProductDTO> productDTOList = productMapper.toProductDTOList(pageProducts.getContent());
 
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("content", productDTOList);
-        response.put("page", pageProducts.getNumber());
-        response.put("total", pageProducts.getTotalPages());
+        response.put("page", pageProducts.getNumber()+1);
+        response.put("total", pageProducts.getTotalPages()+1);
         response.put("records", pageProducts.getTotalElements());
         return response;
     }
