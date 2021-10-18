@@ -36,9 +36,9 @@ public class OrderRestController {
     }
 
     @PostMapping
-    public NewOrderDTO addNewOrder(@RequestBody NewOrderDTO saveOrder,
-                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
-        this.orderService.addNewOrder(this.orderMapper.toOrder(saveOrder), customUserDetails.getId());
+    public NewOrderDTO addNewOrder(@RequestBody NewOrderDTO saveOrder/*,
+                                   (@AuthenticationPrincipal CustomUserDetails customUserDetails*/) throws Exception {
+        this.orderService.addNewOrder(this.orderMapper.toOrder(saveOrder), 1);
         return saveOrder;
     }
 

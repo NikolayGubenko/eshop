@@ -10,31 +10,7 @@
     <link rel="stylesheet" href="/css/admin.css">
     <script src="/js/admin.js"></script>
     <title>Admin page</title>
-    <style>
-        body {
-            line-height: 2.1;
-            font-size: 20px;
-        }
 
-        .ui-jqgrid > {
-
-            font-size: 15px !important;
-
-        }
-
-        .ui-jqgrid tr.jqgrow td {
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            white-space: -moz-pre-wrap;
-            white-space: pre-wrap;
-            white-space: -o-pre-wrap;
-            overflow: hidden;
-            height: auto;
-            vertical-align: middle;
-            padding-top: 3px;
-            padding-bottom: 3px
-        }
-    </style>
 </head>
 <body>
 
@@ -59,7 +35,7 @@
     <div id=editOrderPanel class="container" style="padding:10px;width:90%" hidden="true">
         <table id="orderProducts" class="display">
         </table>
-
+        <div id="orderdetailsPager"></div>
         <label>Order id: </label><label id="orderId"></label>
         </br>
         <label>Order date: </label><label id="orderDate"></label>
@@ -86,7 +62,7 @@
 
     <table id="allProducts" class="display">
     </table>
-
+    <div id="mypager"></div>
     <input onclick="addProduct()" id="addProduct" type="button" value="Add"/>&nbsp;
     <input onclick="editProduct()" id="editProduct" type="button" value="Edit"/>&nbsp;
     <input onclick="deleteProduct()" id="deleteProduct" type="button" value="Delete"/>

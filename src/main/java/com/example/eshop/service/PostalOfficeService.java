@@ -14,9 +14,9 @@ public interface PostalOfficeService {
 
     PostalOffice getPostalOffice(long postalId);
 
-    void savePostalOffice(PostalOffice postalOffice);
+    PostalOffice savePostalOffice(PostalOffice postalOffice);
 
-    void updatePostalOffice(PostalOffice postalOffice, long officeId) throws NotFoundException;
+    PostalOffice updatePostalOffice(PostalOffice postalOffice, long officeId) throws NotFoundException;
 
     void deletePostalOffice(long officeId);
 

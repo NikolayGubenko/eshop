@@ -4,7 +4,6 @@ $(document).ready(function () {
         type: 'GET',
         datatype: "json",
         gridview: true,
-        autoencode: true,
         page:0,
         jsonReader: {
 

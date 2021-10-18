@@ -26,26 +26,24 @@ public class PostalOfficeServiceImpl implements PostalOfficeService {
     }
 
     @Override
-    public void savePostalOffice(PostalOffice postalOffice) {
-        this.postalOfficeRepository.save(postalOffice);
+    public PostalOffice savePostalOffice(PostalOffice postalOffice) {
+        return this.postalOfficeRepository.save(postalOffice);
     }
 
     @Override
-    public void updatePostalOffice(PostalOffice postalOffice, long officeId) throws NotFoundException {
-        PostalOffice updatedPostal  = this.postalOfficeRepository.findById(postalOffice.getId()).orElseThrow(()
-                -> new NotFoundException("Postal office not found"));
+    public PostalOffice updatePostalOffice(PostalOffice postalOffice, long officeId) throws NotFoundException {
+        PostalOffice updatedPostal  = this.postalOfficeRepository.findById(postalOffice.getId())
+                .orElseThrow(()-> new NotFoundException("Postal office not found"));
 
         updatedPostal.setName(postalOffice.getName());
         updatedPostal.setAddress(postalOffice.getAddress());
 
-        this.postalOfficeRepository.save(updatedPostal);
-
+        return this.postalOfficeRepository.save(updatedPostal);
     }
 
     @Override
     public void deletePostalOffice(long officeId) {
         this.postalOfficeRepository.deleteById(officeId);
     }
-
 
 }

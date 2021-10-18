@@ -1,16 +1,51 @@
 $(document).ready(function () {
-    $("#allOrders").jqGrid({
-        url: 'http://localhost:8080/api/v1/admin/orders',
-        type: 'GET',
+    $("#allProducts").jqGrid({
+        url: 'http://localhost:8080/api/v1/admin/products',
         datatype: "json",
-        gridview: true,
-        page: 0,
+        type: 'GET',
+        page:0,
         jsonReader: {
-            id: "id",
+
             root: "content",
-            page: "pageNumber",
-            total: "totalPages",
-            records: "totalElements",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false,
+            cell: "cell",
+            id: "id",
+        },
+        colNames: ['id', 'Product name', 'Price', 'Product type'],
+        colModel: [
+            {name: 'id', index: 'id', width: 20},
+            {name: 'name', index: 'name', width: 200},
+            {name: 'price', index: 'price', width: 175},
+            {name: 'productType', index: 'productType', width: 100},
+        ],
+
+        rowNum:3,
+        loadonce: false,
+        rowList: [5, 10],
+        pager: '#mypager',
+        pageable: true,
+        serverPaging: true,
+        pginput: true,
+        viewRecords: true,
+        caption: "Products"
+
+    })
+    ;
+    $("#allOrders").jqGrid({
+        page:1,
+        url: 'http://localhost:8080/api/v1/admin/orders',
+        mtype: 'GET',
+        datatype: 'json',
+        jsonReader: {
+            root: "content",
+            page: "page",
+            total: "total",
+            records: "records",
+            repeatitems: false,
+            id: "id",
         },
 
         colNames: ['id', 'Date', 'Status', 'Active'],
@@ -20,46 +55,16 @@ $(document).ready(function () {
             {name: 'orderStatus', index: 'orderStatus', width: 175},
             {name: 'active', index: 'active', width: 100},
         ],
-        pageSize: 20,
-        loadOnce: false,
-        pageable: true,
-        serverPaging: true,
+        rowNum: 5,
+        loadonce: false,
         rowList: [5, 10],
         pager: '#ordersPager',
+        gridview: true,
         viewRecords: true,
         caption: "Orders"
     })
     ;
-    $("#allProducts").jqGrid({
-        url: 'http://localhost:8080/api/v1/admin/products',
-        type: 'GET',
-        datatype: "json",
-        gridview: true,
-        page: 0,
-        jsonReader: {
-            id: "id",
-            root: "content",
-            page: "pageNumber",
-            total: "totalPages",
-            records: "totalElements",
-        },
 
-        colNames: ['id', 'Product name', 'Price', 'Product type'],
-        colModel: [
-            {name: 'id', index: 'id', width: 20},
-            {name: 'name', index: 'name', width: 200},
-            {name: 'price', index: 'price', width: 175},
-            {name: 'productType', index: 'productType', width: 100},
-        ],
-        pageSize: 20,
-        loadOnce: false,
-        pageable: true,
-        serverPaging: true,
-        rowList: [5, 10],
-        viewRecords: true,
-        caption: "Products"
-    })
-    ;
 
     $("#allPostal").jqGrid({
         url: 'http://localhost:8080/api/v1/admin/postal-offices',
@@ -68,11 +73,12 @@ $(document).ready(function () {
         gridview: true,
         page: 0,
         jsonReader: {
+            repeatitems: false,
             id: "id",
             root: "content",
-            page: "pageNumber",
-            total: "totalPages",
-            records: "totalElements",
+            page: "page",
+            total: "total",
+            records: "records",
         },
 
         colNames: ['id', 'Postal office name', 'Address'],
@@ -98,7 +104,7 @@ function getProductsFromOrder(id) {
         url: 'http://localhost:8080/api/v1/order-products/' + id,
         type: 'GET',
         datatype: "json",
-        page: 0,
+
         jsonReader: {
             repeatitems: false,
             root: function (obj) {
@@ -123,6 +129,7 @@ function getProductsFromOrder(id) {
             {name: 'quantity', index: 'quantity', width: 300},
         ],
 
+        pager:"#orderdetailsPager",
         loadonce: false,
         rowList: [5, 10],
         sortname: 'name',

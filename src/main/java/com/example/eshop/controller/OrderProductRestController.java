@@ -23,7 +23,7 @@ public class OrderProductRestController {
     }
 
     @DeleteMapping("/order-products/{id}")
-    public void deleteProductFromOrder(@PathVariable Long id) throws Exception {
+    public void deleteProductFromOrder(@PathVariable Long id) {
         this.orderProductService.deleteOrderProduct(id);
     }
 

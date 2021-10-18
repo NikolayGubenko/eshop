@@ -26,20 +26,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void saveProduct(Product product) {
-        this.productRepository.save(product);
+    public Product saveProduct(Product product) {
+        return this.productRepository.save(product);
     }
 
     @Override
-    public void updateProduct(Product product, long productId) throws NotFoundException {
-        Product updatedProduct  = this.productRepository.findById(product.getId()).orElseThrow(()
-                -> new NotFoundException("Product not found"));
+    public Product updateProduct(Product product, long productId) throws NotFoundException {
+        Product updatedProduct = this.productRepository.findById(product.getId())
+                .orElseThrow(() -> new NotFoundException("Product not found"));
 
         updatedProduct.setName(product.getName());
         updatedProduct.setPrice(product.getPrice());
         updatedProduct.setProductType(product.getProductType());
 
-        this.productRepository.save(updatedProduct);
+        return this.productRepository.save(updatedProduct);
     }
 
     @Override

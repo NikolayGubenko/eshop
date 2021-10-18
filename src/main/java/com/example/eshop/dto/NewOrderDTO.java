@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 public class NewOrderDTO {
 
-    private Long id;
+    //private Long id;
 
     private Set<OrderProductDTO> orderProducts;
 
