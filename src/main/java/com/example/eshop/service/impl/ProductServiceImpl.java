@@ -1,6 +1,8 @@
 package com.example.eshop.service.impl;
 
 import com.example.eshop.entity.Product;
+import com.example.eshop.exception.Error;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.ProductRepository;
 import com.example.eshop.service.ProductService;
 import javassist.NotFoundException;
@@ -21,8 +23,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProduct(long productId) {
-        return this.productRepository.getById(productId);
+    public Product getProduct(long productId) throws ShopException {
+        return this.productRepository.findById(productId).orElseThrow(()->new ShopException(Error.PRODUCT_NOT_FOUND));
     }
 
     @Override

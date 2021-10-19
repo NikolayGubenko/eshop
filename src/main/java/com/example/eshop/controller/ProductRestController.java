@@ -1,6 +1,7 @@
 package com.example.eshop.controller;
 
 import com.example.eshop.dto.ProductDTO;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.mapper.ProductMapper;
 import com.example.eshop.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class ProductRestController {
 
 
     @GetMapping("/{id}")
-    public ProductDTO findProduct(@PathVariable long id) {
+    public ProductDTO findProduct(@PathVariable long id) throws ShopException {
         return this.productMapper.toProductDTO(productService.getProduct(id));
     }
 

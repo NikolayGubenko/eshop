@@ -9,12 +9,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Validated
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "api/v1/admin/products")
@@ -34,13 +37,13 @@ public class AdminProductRestController {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("content", productDTOList);
         response.put("page", pageProducts.getNumber()+1);
-        response.put("total", pageProducts.getTotalPages()+1);
+        response.put("total", pageProducts.getTotalPages());
         response.put("records", pageProducts.getTotalElements());
         return response;
     }
 
     @PostMapping
-    public ProductDTO addProduct(@RequestBody ProductDTO productDTO) {
+    public ProductDTO addProduct(@Valid @RequestBody ProductDTO productDTO) {
         Product product = this.productService.saveProduct(this.productMapper.toProduct(productDTO));
         return this.productMapper.toProductDTO(product);
     }

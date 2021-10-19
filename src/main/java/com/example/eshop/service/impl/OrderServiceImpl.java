@@ -1,6 +1,8 @@
 package com.example.eshop.service.impl;
 
 import com.example.eshop.entity.Order;
+import com.example.eshop.exception.Error;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.OrderRepository;
 import com.example.eshop.repository.UserRepository;
 import com.example.eshop.service.OrderService;
@@ -32,8 +34,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrderDetails(long orderId) throws NotFoundException {
-        return this.orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("Order not found"));
+    public Order getOrderDetails(long orderId) throws ShopException {
+        return this.orderRepository.findById(orderId).orElseThrow(() -> new ShopException(Error.ORDER_NOT_FOUND));
     }
 
     @Override

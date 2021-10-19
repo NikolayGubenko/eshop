@@ -4,17 +4,11 @@ $(document).ready(function () {
         datatype: "json",
         type: 'GET',
         jsonReader: {
-
             root: "content",
             page: "page",
-            total: function(result) {
-                //Total number of pages
-                return Math.ceil(result.total / result.records)+1;
-            },
-            //total: "total",
+            total: "total",
             records: "records",
             repeatitems: false,
-            cell: "cell",
             id: "id",
         },
         colNames: ['id', 'Product name', 'Price', 'Product type'],
@@ -27,7 +21,7 @@ $(document).ready(function () {
 
         rowNum:5,
         loadonce: false,
-       // rowList: [5, 10],
+        rowList: [5, 10],
         pager: '#mypager',
         pageable: true,
         serverPaging: true,
@@ -125,17 +119,16 @@ function getProductsFromOrder(id) {
         },
         colNames: ['Product id', 'Product name', 'Product price', 'Product type', "Quantity"],
         colModel: [
-            {name: 'product.id', index: 'product.id', width: 200},
-            {name: 'product.name', index: 'name', width: 200},
-            {name: 'product.price', index: 'price', width: 175},
-            {name: 'product.productType', index: 'productType', width: 100},
-            {name: 'quantity', index: 'quantity', width: 300},
+            {name: 'product.id', index: 'product.id', width: 50},
+            {name: 'product.name', index: 'name', width: 100},
+            {name: 'product.price', index: 'price', width: 100},
+            {name: 'product.productType', index: 'productType', width: 50},
+            {name: 'quantity', index: 'quantity', width: 100},
         ],
 
         pager:"#orderdetailsPager",
         loadonce: false,
         rowList: [5, 10],
-        sortname: 'name',
         viewrecords: true,
         sortorder: "desc",
         caption: "Order details",

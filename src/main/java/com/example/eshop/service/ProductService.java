@@ -1,6 +1,7 @@
 package com.example.eshop.service;
 
 import com.example.eshop.entity.Product;
+import com.example.eshop.exception.ShopException;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +10,7 @@ public interface ProductService {
 
     Page<Product> getAllProducts(Pageable pageable);
 
-    Product getProduct(long productId);
+    Product getProduct(long productId) throws ShopException;
 
     Product saveProduct(Product product);
 

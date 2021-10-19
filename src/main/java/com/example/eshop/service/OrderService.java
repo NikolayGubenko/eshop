@@ -1,6 +1,7 @@
 package com.example.eshop.service;
 
 import com.example.eshop.entity.Order;
+import com.example.eshop.exception.ShopException;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,7 @@ public interface OrderService {
 
     List<Order> getAllUserOrders(long userId) throws Exception;
 
-    Order getOrderDetails(long orderId) throws NotFoundException;
+    Order getOrderDetails(long orderId) throws NotFoundException, ShopException;
 
     void addNewOrder(Order order, long userId) throws Exception;
 

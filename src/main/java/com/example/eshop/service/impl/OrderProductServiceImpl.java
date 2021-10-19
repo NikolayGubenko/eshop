@@ -1,6 +1,8 @@
 package com.example.eshop.service.impl;
 
 import com.example.eshop.entity.OrderProduct;
+import com.example.eshop.exception.Error;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.OrderProductRepository;
 import com.example.eshop.service.OrderProductService;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class OrderProductServiceImpl implements OrderProductService {
     @Override
     public OrderProduct findOrderProduct(Long id) throws Exception {
         Optional<OrderProduct> optionalOrderProduct = orderProductRepository.findById(id);
-        return optionalOrderProduct.orElseThrow(() -> new Exception("Order not found"));
+        return optionalOrderProduct.orElseThrow(() -> new ShopException(Error.ORDER_NOT_FOUND));
     }
 
     @Override
