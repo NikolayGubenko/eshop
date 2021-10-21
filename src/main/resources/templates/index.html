@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
@@ -14,64 +13,64 @@
     <script src="/js/product.js"></script>
     <script src="/js/table.js"></script>
     <title>Eshop</title>
-    <style>
-        body {
-            line-height: 2.1;
-            font-size: 20px;
-        }
-
-        .ui-jqgrid > {
-
-            font-size: 15px !important;
-
-        }
-
-        .ui-jqgrid tr.jqgrow td {
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            white-space: -moz-pre-wrap;
-            white-space: pre-wrap;
-            white-space: -o-pre-wrap;
-            overflow: hidden;
-            height: auto;
-            vertical-align: middle;
-            padding-top: 3px;
-            padding-bottom: 3px
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 <body>
-<div class="container" style="padding:10px;width:100%;float: left;">
-    <h2 id="usrName">[[${#httpServletRequest.remoteUser}]], welcome!</h2>
-    <h5> <p>Click <a th:href="@{/logout}">here</a> to log out.</p></h5>
-    <h2>Your orders</h2>
-    <div id="header"></div>
-    <table id="orders" class="display">
-    </table>
-    <div id="pager2"></div>
 
-    <input type="button" value="View and edit" onclick="getOrderToEdit()"/>&nbsp;&nbsp;
-    <input onclick="deleteOrder()" id="deleteOrder" type="button" value="Delete order"/>&nbsp;
-    <input onclick="createOrder()" id="createOrder" type="button" value="Create order"/>
+<div class="container">
 
-</div>
-<div id=orderProductsPanel class="container" style="padding:10px;width:90%" hidden="false">
-    <h3>Order Details</h3>
-    <table id="orderDetails" class="display">
-    </table>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">eShop</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="padding:10px;width:100%;float: left;">
 
-    <input onclick="deleteProductFromOrder()" id="deleteProduct" type="button" value="Delete product"/>&nbsp;
-    <select id="productList"></select>
-    <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
-    <input onclick="addProduct()" id="addProduct" type="button" value="Add product"/>&nbsp;
-    <input onclick="updateOrder()" id="update" type="button" value="Update order"/>&nbsp;
-    <input onclick="hideDetailsPanel()" id="hideDetails" type="button" value="Hide details"/>
+        <h2>Your orders</h2>
+        <div id="header"></div>
+        <table id="orders" class="display">
+        </table>
+        <div id="pager2"></div>
+
+        <button class="btn btn-lg btn-primary btn-sm" type="button" onclick="getOrderToEdit()">View and edit</button>&nbsp;
+        <button class="btn btn-lg btn-danger btn-sm" onclick="deleteOrder()" id="deleteOrder" type="button">Delete order</button>&nbsp;
+            <button class="btn btn-lg btn-success btn-sm" onclick="createOrder()" id="createOrder" type="button">Create order</button>
+
+    </div>
+    <div id=orderProductsPanel class="container" style="padding:10px;width:90%" hidden="false">
+        <h3>Order Details</h3>
+        <table id="orderDetails" class="display">
+        </table>
+
+        <button class="btn btn-lg btn-danger btn-sm" onclick="deleteProductFromOrder()" id="deleteProduct"
+                type="button">Delete product
+        </button>&nbsp;
+        <select id="productList"></select>
+        <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
+        <button class="btn btn-lg btn-success btn-sm" onclick="addProduct()" id="addProduct" type="button">Add product
+        </button>&nbsp;
+        <button class="btn btn-lg btn-primary btn-sm" onclick="updateOrder()" id="update" type="button">Update order
+        </button>&nbsp;
+        <input onclick="hideDetailsPanel()" id="hideDetails" type="button" value="Hide details"/>
+        <br/><br/>
+        <input id="productPrice" type="text" name="productPrice" readonly="readonly">
+
+        <div id="footer"></div>
+    </div>
     <br/><br/>
-    <input id="productPrice" type="text" name="productPrice" readonly="readonly">
-
-    <div id="footer"></div>
+    <br/><br/>
 </div>
-<br/><br/>
-<br/><br/>
+>
 </body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
 </html>

@@ -1,7 +1,7 @@
 function deleteProductFromOrder() {
 
     let gr = $("#orderDetails").jqGrid('getGridParam', 'selrow');
-    $("#orderDetails").jqGrid('delGridRow', gr, {reloadAfterSubmit: false});
+    $("#orderDetails").jqGrid('delGridRow', gr, {reloadAfterSubmit: true});
 
 }
 
@@ -10,7 +10,23 @@ function deleteOrder() {
 }
 
 function createOrder() {
-
+    $("#orderDetails").jqGrid({
+        colNames: ['Product id','Product name', 'Product price', 'Product type', "Quantity"],
+        colModel: [
+            {name: 'product.id', index: 'product.id', width: 200},
+            {name: 'product.name', index: 'name', width: 200},
+            {name: 'product.price', index: 'price', width: 175},
+            {name: 'product.productType', index: 'productType', width: 100},
+            {name: 'quantity', index: 'quantity', width: 300},
+        ],
+        rowList: [5, 10],
+        pager: '#footer',
+        sortname: 'name',
+        viewrecords: true,
+        sortorder: "desc",
+        caption: "Order details",
+    });
+    document.getElementById("orderProductsPanel").hidden = false;
 }
 
 function addProduct() {

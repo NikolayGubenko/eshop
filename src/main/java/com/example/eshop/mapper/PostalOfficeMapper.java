@@ -11,7 +11,7 @@ public interface PostalOfficeMapper {
 
     PostalOfficeDTO toPostalOfficeDTO(PostalOffice postalOffice);
 
-    List<PostalOfficeDTO> toPostalOfficeDTO(List<PostalOffice> postalOffices);
+    List<PostalOfficeDTO> toPostalOfficeDTOList(List<PostalOffice> postalOffices);
 
     PostalOffice toPostalOffice (PostalOfficeDTO postalOfficeDTO);
 
