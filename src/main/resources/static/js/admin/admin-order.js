@@ -20,9 +20,9 @@ $(document).ready(function () {
             {name: 'orderStatus', index: 'orderStatus', width: 175},
             {name: 'active', index: 'active', width: 100},
         ],
-        rowNum: 5,
+        rowNum: 10,
         loadonce: false,
-        rowList: [5, 10],
+        rowList: [10, 20],
         pager: '#ordersPager',
         gridview: true,
         viewRecords: true,
@@ -78,6 +78,7 @@ function getOrderStats() {
     let rowData = jQuery("#allOrders").getRowData(rowId);
 
     if (rowId != null) {
+        getProductsFromOrder(rowId);
         jQuery("#orderProducts").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/order-products/" + rowId}).trigger("reloadGrid");
         document.getElementById("editOrderPanel").hidden = false;
 
@@ -106,7 +107,11 @@ function updateOrderStats() {
         type: "PUT",
         url: "http://localhost:8080/api/v1/admin/orders/" + orderId,
         contentType: "application/json",
-        data: JSON.stringify(jsonData)
+        data: JSON.stringify(jsonData),
+        success: function () {
+            document.getElementById("editOrderPanel").hidden = true;
+            jQuery("#allOrders").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/admin/orders/"}).trigger("reloadGrid");
+        },
     });
 
 }

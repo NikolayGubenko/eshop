@@ -49,6 +49,7 @@ public class AdminProductRestController {
     @PutMapping("/{id}")
     public ProductDTO updateProduct(@Valid @RequestBody ProductDTO updatedProduct,
                                     @PathVariable long id) throws NotFoundException {
+
         Product product = this.productService.updateProduct(this.productMapper.toProduct(updatedProduct), id);
         return this.productMapper.toProductDTO(product);
     }

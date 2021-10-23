@@ -6,7 +6,6 @@ import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.OrderRepository;
 import com.example.eshop.repository.UserRepository;
 import com.example.eshop.service.OrderService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,32 +38,32 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addNewOrder(Order order, long userId) throws NotFoundException {
+    public void addNewOrder(Order order, long userId) throws ShopException {
 
         order.setOrderDate(LocalDateTime.now());
         order.getOrderProducts().forEach((OrderProduct) -> OrderProduct.setOrder(order));
-        order.setUser(userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found")));
-
+        order.setUser(userRepository.findById(userId).orElseThrow(() -> new ShopException(Error.USER_NOT_FOUND)));
+        order.setActive(true);
         this.orderRepository.save(order);
 
     }
 
     @Override
-    public void updateOrder(Order updatedOrder, long orderId, long userId) throws Exception {
-        Order tmpOrder = this.orderRepository.findById(updatedOrder.getId()).orElseThrow(()
-                -> new NotFoundException("Order not found"));
+    public void updateOrder(Order updatedOrder, long orderId, long userId) throws ShopException {
+        Order tmpOrder = this.orderRepository.findById(updatedOrder.getId())
+                .orElseThrow(()-> new ShopException(Error.ORDER_NOT_FOUND));
 
         tmpOrder.getOrderProducts().clear();
         tmpOrder.getOrderProducts().addAll(updatedOrder.getOrderProducts());
         tmpOrder.getOrderProducts().forEach((OrderProduct) -> OrderProduct.setOrder(updatedOrder));
-        tmpOrder.setUser(userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found")));
+        tmpOrder.setUser(userRepository.findById(userId).orElseThrow(() -> new ShopException(Error.USER_NOT_FOUND)));
         this.orderRepository.save(tmpOrder);
     }
 
     @Override
-    public Order adminUpdateOrder(Order updatedOrder, long orderId) throws NotFoundException {
+    public Order adminUpdateOrder(Order updatedOrder, long orderId) throws ShopException {
         Order tmpOrder = this.orderRepository.findById(updatedOrder.getId())
-                .orElseThrow(() -> new NotFoundException("Order not found"));
+                .orElseThrow(() -> new ShopException(Error.ORDER_NOT_FOUND));
 
         tmpOrder.setOrderStatus(updatedOrder.getOrderStatus());
         tmpOrder.setActive(updatedOrder.isActive());

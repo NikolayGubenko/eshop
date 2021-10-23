@@ -21,7 +21,7 @@ $(document).ready(function () {
         ],
         rowNum: 10,
         loadonce: false,
-        rowList: [5, 10],
+        rowList: [10, 20],
         pager: '#productPager',
         pageable: true,
         serverPaging: true,

@@ -1,7 +1,7 @@
 <!doctype html>
 
-<html lang=en xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
->
+<html lang=en xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 
     <meta charset="utf-8">
@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/css/ui.jqgrid.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/js/jquery.jqgrid.min.js"></script>
-    <script src="/js/register.js"></script>
 
-    <title>Eshop login</title>
+    <title>Eshop registration</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
+    <script src="/js/user/user-register.js"></script>
 </head>
 
 <style>
@@ -87,7 +86,7 @@
         <label for="confirmPassword" class="sr-only">Confirm password</label>
         <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm password" required>
         <p></p>
-        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="registerUser()">Register</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="registerNewUser()">Register</button>
         <button class="btn btn-danger btn btn-lg btn-block" type="button" onclick="history.back(-1)" >Back</button>
     </form>
 

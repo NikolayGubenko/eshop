@@ -20,7 +20,7 @@ public interface OrderService {
 
     void updateOrder(Order updatedOrder, long orderId, long userId) throws Exception;
 
-    Order adminUpdateOrder(Order updatedOrder, long orderId) throws NotFoundException;
+    Order adminUpdateOrder(Order updatedOrder, long orderId) throws ShopException;
 
     void deleteOrder(long id);
 }

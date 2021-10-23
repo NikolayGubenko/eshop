@@ -2,15 +2,10 @@ package com.example.eshop.controller;
 
 import com.example.eshop.dto.NewOrderDTO;
 import com.example.eshop.dto.OrderDTO;
-import com.example.eshop.entity.Order;
 import com.example.eshop.mapper.OrderMapper;
 import com.example.eshop.model.CustomUserDetails;
 import com.example.eshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 

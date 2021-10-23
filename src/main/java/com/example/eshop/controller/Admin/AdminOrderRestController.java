@@ -3,6 +3,7 @@ package com.example.eshop.controller.Admin;
 import com.example.eshop.dto.AdminOrderDTO;
 import com.example.eshop.dto.PageResponseDTO;
 import com.example.eshop.entity.Order;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.mapper.OrderMapper;
 import com.example.eshop.service.OrderService;
 import javassist.NotFoundException;
@@ -39,7 +40,7 @@ public class AdminOrderRestController {
 
     @PutMapping("/{id}")
     public AdminOrderDTO updateOrderStats(@RequestBody AdminOrderDTO updatedOrder,
-                                          @PathVariable long id) throws NotFoundException {
+                                          @PathVariable long id) throws ShopException {
 
         Order order = this.orderService.adminUpdateOrder(this.orderMapper.toOrder(updatedOrder), id);
         return this.orderMapper.toAdminOrderDTO(order);

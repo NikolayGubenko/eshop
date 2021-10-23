@@ -1,6 +1,8 @@
 package com.example.eshop.service.impl;
 
 import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.exception.Error;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.PostalOfficeRepository;
 import com.example.eshop.service.PostalOfficeService;
 import javassist.NotFoundException;
@@ -31,9 +33,9 @@ public class PostalOfficeServiceImpl implements PostalOfficeService {
     }
 
     @Override
-    public PostalOffice updatePostalOffice(PostalOffice postalOffice, long officeId) throws NotFoundException {
-        PostalOffice updatedPostal  = this.postalOfficeRepository.findById(postalOffice.getId())
-                .orElseThrow(()-> new NotFoundException("Postal office not found"));
+    public PostalOffice updatePostalOffice(PostalOffice postalOffice, long officeId) throws ShopException {
+        PostalOffice updatedPostal = this.postalOfficeRepository.findById(postalOffice.getId())
+                .orElseThrow(() -> new ShopException(Error.POSTAL_OFFICE_NOT_FOUND));
 
         updatedPostal.setName(postalOffice.getName());
         updatedPostal.setAddress(postalOffice.getAddress());

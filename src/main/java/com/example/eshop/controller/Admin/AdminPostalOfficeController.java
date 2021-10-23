@@ -3,6 +3,7 @@ package com.example.eshop.controller.Admin;
 import com.example.eshop.dto.PageResponseDTO;
 import com.example.eshop.dto.PostalOfficeDTO;
 import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.mapper.PostalOfficeMapper;
 import com.example.eshop.service.PostalOfficeService;
 import javassist.NotFoundException;
@@ -49,7 +50,7 @@ public class AdminPostalOfficeController {
 
     @PutMapping("/{id}")
     public PostalOfficeDTO updatePostalOffice(@Valid @RequestBody PostalOfficeDTO postalOfficeDTO,
-                                              @PathVariable long id) throws NotFoundException {
+                                              @PathVariable long id) throws ShopException {
 
         PostalOffice postalOffice = this.postalOfficeService.updatePostalOffice(this.postalOfficeMapper.toPostalOffice(postalOfficeDTO), id);
         return this.postalOfficeMapper.toPostalOfficeDTO(postalOffice);

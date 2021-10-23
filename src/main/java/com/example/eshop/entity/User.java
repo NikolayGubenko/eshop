@@ -3,7 +3,6 @@ package com.example.eshop.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Iterator;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -19,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "first_name")
@@ -36,5 +35,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @Column(name="active")
+    private boolean active;
 
 }

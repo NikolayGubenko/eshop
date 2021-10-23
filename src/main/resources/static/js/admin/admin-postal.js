@@ -25,7 +25,7 @@ $(document).ready(function () {
         loadOnce: false,
         pageable: true,
         serverPaging: true,
-        rowList: [5, 10],
+        rowList: [10, 20],
         viewRecords: true,
         caption: "Postal offices"
     })
