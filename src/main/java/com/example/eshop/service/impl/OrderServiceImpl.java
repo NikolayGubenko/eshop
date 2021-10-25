@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -28,8 +27,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllUserOrders(long userId) {
-        return this.orderRepository.findAllByUserId(userId);
+    public Page<Order> getAllUserOrders(Pageable pageable, long userId) {
+        return this.orderRepository.findAllByUserId(pageable,userId);
     }
 
     @Override

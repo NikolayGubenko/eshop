@@ -8,7 +8,8 @@ public enum Error {
     PRODUCT_NOT_FOUND(2, "Product not found"),
     USER_NOT_FOUND(3, "User not found"),
     POSTAL_OFFICE_NOT_FOUND(4, "Postal office not found"),
-    USER_ALREADY_EXISTS(5, "User already exists");
+    USER_ALREADY_EXISTS(5, "User already exists"),
+    TOKEN_NOT_FOUND(6, "Confirmation token not found");
 
     private final int errorCode;
     private final String errorMessage;
@@ -17,4 +18,4 @@ public enum Error {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
-}
+    }

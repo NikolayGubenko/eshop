@@ -11,7 +11,8 @@ function registerNewUser() {
         contentType: "application/json",
         data: JSON.stringify(jsonData),
         success: function () {
-            alert("Registered");
+            alert("Account has been registered. Check your email for verification link!");
+            history.go(-1);
         },
         error: function (errorObj) {
 

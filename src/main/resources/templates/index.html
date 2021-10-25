@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/css/ui.jqgrid.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/js/jquery.jqgrid.min.js"></script>
-    <script src="/js/order.js"></script>
-    <script src="/js/product.js"></script>
-    <script src="/js/table.js"></script>
+    <script src="/js/user/user-order.js"></script>
+    <script src="/js/user/user-product.js"></script>
     <title>Eshop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -40,30 +39,41 @@
         </table>
         <div id="pager2"></div>
 
+        <p></p>
+
+        <button class="btn btn-lg btn-success btn-sm" onclick="createOrder()" id="createOrder" type="button">Create new
+            order
+        </button>
         <button class="btn btn-lg btn-primary btn-sm" type="button" onclick="getOrderToEdit()">View and edit</button>&nbsp;
-        <button class="btn btn-lg btn-danger btn-sm" onclick="deleteOrder()" id="deleteOrder" type="button">Delete order</button>&nbsp;
-            <button class="btn btn-lg btn-success btn-sm" onclick="createOrder()" id="createOrder" type="button">Create order</button>
+        <button class="btn btn-lg btn-danger btn-sm" onclick="deleteOrder()" id="deleteOrder" type="button">Delete
+            order
+        </button>&nbsp;
 
     </div>
-    <div id=orderProductsPanel class="container" style="padding:10px;width:90%" hidden="false">
+
+    <div id=orderProductsPanel class="container" style="padding:10px;width:90%" hidden="true">
         <h3>Order Details</h3>
         <table id="orderDetails" class="display">
         </table>
-
+        <p></p>
+        <select id="productList"></select>
+        <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
+        <button class="btn btn-lg btn-success btn-sm" id="addProduct" onclick="showProducts()" type="button">Add product
+        </button>&nbsp;
         <button class="btn btn-lg btn-danger btn-sm" onclick="deleteProductFromOrder()" id="deleteProduct"
                 type="button">Delete product
         </button>&nbsp;
-        <select id="productList"></select>
-        <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
-        <button class="btn btn-lg btn-success btn-sm" onclick="addProduct()" id="addProduct" type="button">Add product
-        </button>&nbsp;
-        <button class="btn btn-lg btn-primary btn-sm" onclick="updateOrder()" id="update" type="button">Update order
+        <button class="btn btn-lg btn-primary btn-sm" onclick="updateOrder()" id="update" type="button">Save order
         </button>&nbsp;
         <input onclick="hideDetailsPanel()" id="hideDetails" type="button" value="Hide details"/>
         <br/><br/>
         <input id="productPrice" type="text" name="productPrice" readonly="readonly">
 
         <div id="footer"></div>
+    </div>
+    <div id=productsPanel class="container" style="padding:10px;width:90%" hidden="true">
+        <table id="allProducts" class="display">
+        </table>
     </div>
     <br/><br/>
     <br/><br/>

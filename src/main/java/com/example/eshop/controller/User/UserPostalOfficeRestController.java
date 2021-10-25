@@ -1,4 +1,4 @@
-package com.example.eshop.controller;
+package com.example.eshop.controller.User;
 
 import com.example.eshop.mapper.PostalOfficeMapper;
 import com.example.eshop.service.PostalOfficeService;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "api/v1/postal-offices")
-public class PostalOfficeRestController {
+public class UserPostalOfficeRestController {
 
     private final PostalOfficeService postalOfficeService;
 

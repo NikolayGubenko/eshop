@@ -12,7 +12,7 @@ public interface OrderService {
 
     Page<Order> getAllOrders(Pageable pageable);
 
-    List<Order> getAllUserOrders(long userId) throws Exception;
+    Page<Order> getAllUserOrders(Pageable pageable, long userId) throws Exception;
 
     Order getOrderDetails(long orderId) throws NotFoundException, ShopException;
 
