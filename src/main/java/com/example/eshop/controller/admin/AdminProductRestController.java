@@ -1,4 +1,4 @@
-package com.example.eshop.controller.Admin;
+package com.example.eshop.controller.admin;
 
 import com.example.eshop.dto.PageResponseDTO;
 import com.example.eshop.dto.ProductDTO;

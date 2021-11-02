@@ -1,9 +1,9 @@
-package com.example.eshop.controller.User;
+package com.example.eshop.controller.user;
 
-import com.example.eshop.dto.NewOrderDTO;
 import com.example.eshop.dto.OrderDTO;
 import com.example.eshop.dto.PageResponseDTO;
 import com.example.eshop.entity.Order;
+import com.example.eshop.exception.ShopException;
 import com.example.eshop.mapper.OrderMapper;
 import com.example.eshop.model.CustomUserDetails;
 import com.example.eshop.service.OrderService;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "api/v1/orders")
+@RequestMapping(value = "api/v1/users/orders")
 public class UserOrderRestController {
 
     private final OrderService orderService;
@@ -46,22 +46,22 @@ public class UserOrderRestController {
     }
 
     @PostMapping
-    public NewOrderDTO addNewOrder(@RequestBody NewOrderDTO saveOrder,
-                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
-        this.orderService.addNewOrder(this.orderMapper.toOrder(saveOrder), customUserDetails.getId());
-        return saveOrder;
+    public OrderDTO addNewOrder(@RequestBody OrderDTO saveOrder,
+                                @AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
+        Order newOrder = this.orderService.addNewOrder(this.orderMapper.toOrder(saveOrder), customUserDetails.getId());
+        return this.orderMapper.toOrderDTO(newOrder);
     }
 
     @PutMapping("/{id}")
-    public NewOrderDTO updateOrder(@PathVariable long id,
-                                   @RequestBody NewOrderDTO updatedOrder,
-                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
-        this.orderService.updateOrder(this.orderMapper.toOrder(updatedOrder), id, customUserDetails.getId());
-        return updatedOrder;
+    public OrderDTO updateOrder(@PathVariable long id,
+                                @RequestBody OrderDTO updatedOrder,
+                                @AuthenticationPrincipal CustomUserDetails customUserDetails) throws Exception {
+        Order tmpOrder = this.orderService.updateOrder(this.orderMapper.toOrder(updatedOrder), id, customUserDetails.getId());
+        return this.orderMapper.toOrderDTO(tmpOrder);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable long id) {
+    public void deleteOrder(@PathVariable long id) throws ShopException {
         this.orderService.deleteOrder(id);
     }
 

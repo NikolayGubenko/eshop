@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

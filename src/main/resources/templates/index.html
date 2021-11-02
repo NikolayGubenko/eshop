@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.5/js/jquery.jqgrid.min.js"></script>
     <script src="/js/user/user-order.js"></script>
     <script src="/js/user/user-product.js"></script>
+    <script src="/js/user/user-postal.js"></script>
     <title>Eshop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -31,7 +32,7 @@
             </div>
         </div>
     </nav>
-    <div class="container" style="padding:10px;width:100%;float: left;">
+    <div class="container" style="padding:20px;width:90%">
 
         <h2>Your orders</h2>
         <div id="header"></div>
@@ -51,34 +52,82 @@
 
     </div>
 
-    <div id=orderProductsPanel class="container" style="padding:10px;width:90%" hidden="true">
-        <h3>Order Details</h3>
+    <div id=orderProductsPanel class="container" style="padding:20px;width:90%" hidden="true">
         <table id="orderDetails" class="display">
         </table>
         <p></p>
-        <select id="productList"></select>
-        <input id="count" type="number" min="0" max="10" step="1" value="0" size="6" name="numberOfProducts">
-        <button class="btn btn-lg btn-success btn-sm" id="addProduct" onclick="showProducts()" type="button">Add product
+        <div><label>Order id: </label><label id="order-id"></label>
+            <label>Order description: <input id="order-description" class="popover-dismissible" data-toggle="popover"
+                                             data-trigger="focus" type="text" name="orderDescription"
+                                             placeholder="Type order description"/> </label>
+            <div><label>Postal office id: </label><label id="postal-id"></label>
+                <label>Postal office name: </label><label id="postal-name"></label>
+                <label>Postal office address: </label><label id="postal-address"></label>
+                <button class="btn btn-lg btn-success btn-sm" id="changeProduct" onclick="showPostal()" type="button">
+                    Change
+                </button>
+            </div>
+        </div>
+        <p></p>
+
+        <div><label>Order product id: </label><label id="order-product-id"></label>
+            <label>Product id: </label><label id="product-id"></label>
+            <label>Product name: </label><label id="product-name"></label>
+            <label>Product type: </label><label id="product-type"></label>
+            <label>Product price: </label><label id="product-price"></label></div>
+
+        <label>Product quantity: <input id="product-quantity" class="popover-dismissible" data-toggle="popover"
+                                        data-trigger="focus" type="number" min="1" max="10" step="1"
+                                        value="0"
+                                        size="6" name="productQuantity"></label>
+        <button class="btn btn-lg btn-success btn-sm" id="acceptProduct" onclick="acceptProduct()" type="button">
+            Accept
+        </button>
+        <button class="btn btn-lg btn-info btn-sm" onclick="showProducts()" id="showProdList" type="button">
+            Product list
+        </button>
+        <p></p>
+
+        <button class="btn btn-lg btn-success btn-sm" id="addProductInOrder" onclick="addProduct()" type="button">
+            Add product in order
+        </button>&nbsp;
+        <button class="btn btn-lg btn-warning btn-sm" id="editProduct" onclick="editProductInOrder()"
+                type="button">Edit
+            product in order
         </button>&nbsp;
         <button class="btn btn-lg btn-danger btn-sm" onclick="deleteProductFromOrder()" id="deleteProduct"
                 type="button">Delete product
         </button>&nbsp;
-        <button class="btn btn-lg btn-primary btn-sm" onclick="updateOrder()" id="update" type="button">Save order
+        <button class="btn btn-lg btn-primary btn-sm" onclick="updateOrder()" id="update" type="button">Save
+            order
         </button>&nbsp;
-        <input onclick="hideDetailsPanel()" id="hideDetails" type="button" value="Hide details"/>
+        <button class="btn btn-lg btn-info btn-sm" onclick="hideDetailsPanel()" id="hideDetails" type="button">
+            Hide
+            details
+        </button>
         <br/><br/>
-        <input id="productPrice" type="text" name="productPrice" readonly="readonly">
-
         <div id="footer"></div>
     </div>
-    <div id=productsPanel class="container" style="padding:10px;width:90%" hidden="true">
+    <div id=productsPanel class="container" style="padding:20px;width:90%" hidden="true">
         <table id="allProducts" class="display">
         </table>
+        <div id="prodFooter"></div>
+        <p></p>
+        <button class="btn btn-lg btn-info btn-sm" onclick="selectProduct()" id="selectProduct" type="button">Select
+        </button>
+    </div>
+    <div id=postalPanel class="container" style="padding:20px;width:90%" hidden="true">
+        <table id="allPostal" class="display">
+        </table>
+        <div id="postalFooter"></div>
+        <p></p>
+        <button class="btn btn-lg btn-info btn-sm" onclick="selectProduct()" id="selectPostal" type="button">Select
+        </button>
     </div>
     <br/><br/>
     <br/><br/>
 </div>
->
+</div>
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"

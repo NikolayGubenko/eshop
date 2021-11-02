@@ -1,4 +1,4 @@
-package com.example.eshop.controller.User;
+package com.example.eshop.controller.user;
 
 import com.example.eshop.dto.PageResponseDTO;
 import com.example.eshop.dto.ProductDTO;
@@ -9,15 +9,12 @@ import com.example.eshop.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping(value = "api/v1/products")
+@RequestMapping(value = "api/v1/users/products")
 @RequiredArgsConstructor
 public class UserProductRestController {
 
@@ -41,8 +38,8 @@ public class UserProductRestController {
     }
 
     @GetMapping("/{id}")
-    public ProductDTO findProduct(@PathVariable long id) throws ShopException {
-        return this.productMapper.toProductDTO(productService.getProduct(id));
+    public ProductDTO getProduct(@PathVariable long id) throws ShopException {
+        return this.productMapper.toProductDTO(this.productService.getProduct(id));
     }
 
 }

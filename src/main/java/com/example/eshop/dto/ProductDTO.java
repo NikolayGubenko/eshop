@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Data
 public class ProductDTO {
 
-    private long id;
+    private Long id;
 
     @NotBlank(message="Enter product name")
     private String name;

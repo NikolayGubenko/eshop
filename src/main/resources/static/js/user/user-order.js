@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#orders").jqGrid({
-        url: 'http://localhost:8080/api/v1/orders',
+        url: 'http://localhost:8080/api/v1/users/orders',
         type: 'GET',
         datatype: "json",
         jsonReader: {
@@ -12,13 +12,14 @@ $(document).ready(function () {
             id: "id",
         },
 
-        colNames: ['id', 'Date', 'Status', 'Description', "Postal office"],
+        colNames: ['id', 'Date', 'Status', 'Description', "Postal id", "Postal office"],
         colModel: [
-            {name: 'id', index: 'id', width: 20},
+            {name: 'id', index: 'id', width: 40},
             {name: 'orderDate', index: 'orderDate', width: 200},
             {name: 'orderStatus', index: 'orderStatus', width: 175},
             {name: 'description', index: 'description', width: 100},
-            {name: 'postalOffice.name', index: 'postalOffice.name', width: 300},
+            {name: 'postalOffice.id', index: 'postalOffice.id', width: 100},
+            {name: 'postalOffice.name', index: 'postalOffice.name', width: 200},
         ],
         rowNum: 10,
         loadonce: false,
@@ -52,17 +53,18 @@ function getOrderDetails(id) {
                 return obj.length;
             },
         },
-        colNames: ['Product id', 'Product name', 'Product price', 'Product type', "Quantity"],
+        colNames: ['OrderProduct id', 'Product id', 'Product name', 'Product price', 'Product type', "Quantity"],
         colModel: [
-            {name: 'product.id', index: 'product.id', width: 200},
+            {name: 'id', index: 'id', width: 100},
+            {name: 'product.id', index: 'product.id', width: 100},
             {name: 'product.name', index: 'name', width: 200},
             {name: 'product.price', index: 'price', width: 175},
             {name: 'product.productType', index: 'productType', width: 100},
             {name: 'quantity', index: 'quantity', width: 300},
         ],
 
-        loadonce: false,
-        rowList: [5, 10],
+        loadonce: true,
+        rowList: [10, 20],
         pager: '#footer',
         sortname: 'name',
         viewrecords: true,
@@ -70,16 +72,18 @@ function getOrderDetails(id) {
         caption: "Order details",
     });
     jQuery("#orderDetails").jqGrid('setGridParam', {url: 'http://localhost:8080/api/v1/order-products/' + id}).trigger("reloadGrid");
+    document.getElementById("order-id").textContent = id;
+    let rowId = $("#orders").jqGrid('getGridParam', 'selrow');
+    let rowData = jQuery("#orders").getRowData(rowId);
+    getPostalDetails(rowData['postalOffice.id']);
+    document.getElementById("order-description").value = rowData['description'];
+
 }
 
 function deleteProductFromOrder() {
 
     let gr = $("#orderDetails").jqGrid('getGridParam', 'selrow');
     $("#orderDetails").jqGrid('delGridRow', gr, {reloadAfterSubmit: true});
-
-}
-
-function deleteOrder() {
 
 }
 
@@ -109,10 +113,10 @@ function createOrder() {
             {name: 'product.name', index: 'name', width: 200},
             {name: 'product.price', index: 'price', width: 175},
             {name: 'product.productType', index: 'productType', width: 100},
-            {name: 'quantity', index: 'quantity', width: 300},
+            {name: 'quantity', index: 'quantity', width: 100},
         ],
         rowList: [5, 10],
-        pager: '#footer',
+        pager: '#prodFooter',
         sortname: 'name',
         viewrecords: true,
         sortorder: "desc",
@@ -121,18 +125,18 @@ function createOrder() {
     jQuery("#orderDetails").jqGrid('clearGridData');
 
     document.getElementById("orderProductsPanel").hidden = false;
+    document.getElementById("order-id").textContent = "";
 }
 
 
-
 function updateOrder() {
-    let grid = $("#orders");
-    let orderId = grid.jqGrid('getGridParam', "selrow");
+    let orderId = document.getElementById("order-id").textContent;
     let rows = jQuery("#orderDetails").jqGrid('getRowData');
     let row = [];
 
     for (let i = 0; i < rows.length; i++) {
         row[i] = ({
+            id: rows[i]['id'],
             product: {
                 id: rows[i]['product.id'],
                 name: rows[i]['product.name'],
@@ -143,8 +147,9 @@ function updateOrder() {
     }
 
     let jsonData = ({
-        id: orderId, orderProducts: row, orderDate: "2021-10-01 12:02",
-        description: "Order description",
+        id: orderId,
+        orderProducts: row, orderDate: "2021-10-01 12:02",
+        description: "111",
         orderStatus: "NEW",
         postalOffice: {
             id: 1,
@@ -154,17 +159,29 @@ function updateOrder() {
     })
     alert(JSON.stringify(jsonData));
 
-    $.ajax({
-        type: "PUT",
-        url: "http://localhost:8080/api/v1/orders/" + orderId,
-        contentType: "application/json",
-        data: JSON.stringify(jsonData)
-    });
+    if (orderId !== "") {
+
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/api/v1/users/orders/" + orderId,
+            contentType: "application/json",
+            data: JSON.stringify(jsonData),
+        });
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/v1/users/orders",
+            contentType: "application/json",
+            data: JSON.stringify(jsonData),
+        });
+    }
 
 }
 
 function hideDetailsPanel() {
     document.getElementById("orderProductsPanel").hidden = true;
+    document.getElementById("productsPanel").hidden = true;
+
 }
 
 function getOrderToEdit() {
@@ -176,4 +193,15 @@ function getOrderToEdit() {
         document.getElementById("orderProductsPanel").hidden = false;
     } else
         alert("Please, select an order");
+}
+
+function deleteOrder() {
+    let rowId = $("#orders").jqGrid('getGridParam', 'selrow');
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/api/v1/users/orders/" + rowId,
+        success: function () {
+            jQuery("#orders").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/orders/"}).trigger("reloadGrid");
+        }
+    });
 }

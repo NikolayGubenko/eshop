@@ -1,7 +1,6 @@
 package com.example.eshop.service.impl;
 
 import com.example.eshop.entity.User;
-import com.example.eshop.entity.VerificationToken;
 import com.example.eshop.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;

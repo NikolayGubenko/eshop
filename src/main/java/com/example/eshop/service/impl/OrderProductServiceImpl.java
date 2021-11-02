@@ -21,19 +21,10 @@ public class OrderProductServiceImpl implements OrderProductService {
 
     @Override
     public Set<OrderProduct> getProductsInOrder(Long id) {
-        return orderProductRepository.findOrderProductsByOrderId(id);
+        return this.orderProductRepository.findOrderProductsByOrderId(id);
     }
 
-    @Override
-    public OrderProduct addOrderProduct(OrderProduct orderProduct) {
-        return orderProductRepository.save(orderProduct);
-    }
 
-    @Override
-    public OrderProduct findOrderProduct(Long id) throws Exception {
-        Optional<OrderProduct> optionalOrderProduct = orderProductRepository.findById(id);
-        return optionalOrderProduct.orElseThrow(() -> new ShopException(Error.ORDER_NOT_FOUND));
-    }
 
     @Override
     public void deleteOrderProduct(Long id) {

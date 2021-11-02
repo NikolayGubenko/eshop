@@ -20,12 +20,12 @@ $(document).ready(function () {
             {name: 'name', index: 'name', width: 200},
             {name: 'address', index: 'address', width: 175},
         ],
-        pageSize: 10,
-        pager: '#postalPager',
+        rowNum: 10,
         loadOnce: false,
+        rowList: [10, 20],
+        pager: '#postalPager',
         pageable: true,
         serverPaging: true,
-        rowList: [10, 20],
         viewRecords: true,
         caption: "Postal offices"
     })

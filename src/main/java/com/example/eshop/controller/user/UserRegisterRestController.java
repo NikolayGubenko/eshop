@@ -1,4 +1,4 @@
-package com.example.eshop.controller.User;
+package com.example.eshop.controller.user;
 
 import com.example.eshop.dto.UserDTO;
 import com.example.eshop.entity.User;

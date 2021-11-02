@@ -5,7 +5,6 @@ import com.example.eshop.exception.Error;
 import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.PostalOfficeRepository;
 import com.example.eshop.service.PostalOfficeService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

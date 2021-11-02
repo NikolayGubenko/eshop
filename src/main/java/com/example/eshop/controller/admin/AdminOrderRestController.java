@@ -1,4 +1,4 @@
-package com.example.eshop.controller.Admin;
+package com.example.eshop.controller.admin;
 
 import com.example.eshop.dto.AdminOrderDTO;
 import com.example.eshop.dto.PageResponseDTO;
@@ -6,7 +6,6 @@ import com.example.eshop.entity.Order;
 import com.example.eshop.exception.ShopException;
 import com.example.eshop.mapper.OrderMapper;
 import com.example.eshop.service.OrderService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<Order> getAllUserOrders(Pageable pageable, long userId) {
-        return this.orderRepository.findAllByUserId(pageable,userId);
+        return this.orderRepository.findAllByUserIdAndActiveTrue(pageable, userId);
     }
 
     @Override
@@ -37,26 +37,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addNewOrder(Order order, long userId) throws ShopException {
+    public Order addNewOrder(Order order, long userId) throws ShopException {
 
-        order.setOrderDate(LocalDateTime.now());
         order.getOrderProducts().forEach((OrderProduct) -> OrderProduct.setOrder(order));
+        order.setOrderDate(LocalDateTime.now());
         order.setUser(userRepository.findById(userId).orElseThrow(() -> new ShopException(Error.USER_NOT_FOUND)));
         order.setActive(true);
-        this.orderRepository.save(order);
 
+        return this.orderRepository.save(order);
     }
 
     @Override
-    public void updateOrder(Order updatedOrder, long orderId, long userId) throws ShopException {
+    public Order updateOrder(Order updatedOrder, long orderId, long userId) throws ShopException {
         Order tmpOrder = this.orderRepository.findById(updatedOrder.getId())
-                .orElseThrow(()-> new ShopException(Error.ORDER_NOT_FOUND));
+                .orElseThrow(() -> new ShopException(Error.ORDER_NOT_FOUND));
 
         tmpOrder.getOrderProducts().clear();
         tmpOrder.getOrderProducts().addAll(updatedOrder.getOrderProducts());
         tmpOrder.getOrderProducts().forEach((OrderProduct) -> OrderProduct.setOrder(updatedOrder));
         tmpOrder.setUser(userRepository.findById(userId).orElseThrow(() -> new ShopException(Error.USER_NOT_FOUND)));
-        this.orderRepository.save(tmpOrder);
+
+        return this.orderRepository.save(tmpOrder);
     }
 
     @Override
@@ -70,7 +71,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(long id) {
-        this.orderRepository.deleteById(id);
+    public void deleteOrder(long id) throws ShopException {
+        Order deletedOrder = this.orderRepository.findById(id).orElseThrow(() -> new ShopException(Error.ORDER_NOT_FOUND));
+        deletedOrder.setActive(false);
+        this.orderRepository.save(deletedOrder);
     }
 }

@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/login","/register","/confirm").permitAll()
+                .antMatchers("/", "/login", "/register", "/confirm").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
                 .antMatchers("/index").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
@@ -71,10 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web){
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/js/**");
         web.ignoring().antMatchers("/api/v1/users/register/confirm");
-        //web.ignoring().antMatchers("/**","/api/**");
     }
 
 }
