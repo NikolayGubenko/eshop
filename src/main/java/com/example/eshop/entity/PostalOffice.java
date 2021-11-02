@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "postal_offices")
+public class PostalOffice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +19,8 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "address")
+    private String address;
 
 }
