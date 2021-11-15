@@ -1,7 +1,7 @@
 package com.example.eshop.mapper;
 
 import com.example.eshop.dto.PostalOfficeDTO;
-import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.mysql.entity.PostalOffice;
 import org.mapstruct.Mapper;
 
 import java.util.List;

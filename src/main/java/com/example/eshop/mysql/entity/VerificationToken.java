@@ -1,4 +1,4 @@
-package com.example.eshop.entity;
+package com.example.eshop.mysql.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

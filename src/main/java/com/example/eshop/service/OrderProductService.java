@@ -1,6 +1,6 @@
 package com.example.eshop.service;
 
-import com.example.eshop.entity.OrderProduct;
+import com.example.eshop.mysql.entity.OrderProduct;
 
 import java.util.Set;
 

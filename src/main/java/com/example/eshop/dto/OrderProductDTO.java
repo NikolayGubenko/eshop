@@ -1,6 +1,6 @@
 package com.example.eshop.dto;
 
-import com.example.eshop.entity.Product;
+import com.example.eshop.mysql.entity.Product;
 import lombok.Data;
 
 @Data

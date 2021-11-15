@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $("#allPostal").jqGrid({
-        url: 'http://localhost:8080/api/v1/admin/postal-offices',
+        url: 'http://localhost:8080/api/v1/users/postal-offices',
         type: 'GET',
         datatype: "json",
         gridview: true,
@@ -85,7 +85,7 @@ function savePostal() {
             success: function () {
                 document.getElementById("editPostalPanel").hidden = true;
                 $("[data-toggle='popover']").popover('destroy');
-                jQuery("#allPostal").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/admin/postal-offices/"}).trigger("reloadGrid");
+                jQuery("#allPostal").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/postal-offices/"}).trigger("reloadGrid");
             },
             error: function (errorObj) {
                 showPostalErrors(errorObj);
@@ -100,7 +100,7 @@ function savePostal() {
             success: function () {
                 document.getElementById("editPostalPanel").hidden = true;
                 $("[data-toggle='popover']").popover('destroy');
-                jQuery("#allPostal").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/admin/postal-offices/"}).trigger("reloadGrid");
+                jQuery("#allPostal").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/postal-offices/"}).trigger("reloadGrid");
             },
             error: function (errorObj) {
                 showPostalErrors(errorObj);
@@ -115,7 +115,7 @@ function deletePostal() {
         type: "DELETE",
         url: "http://localhost:8080/api/v1/admin/postal-offices/" + rowId,
         success: function () {
-            jQuery("#allPostal").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/admin/postal-offices/"}).trigger("reloadGrid");
+            jQuery("#allPostal").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/postal-offices/"}).trigger("reloadGrid");
         }
     });
 }

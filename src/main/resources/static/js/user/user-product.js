@@ -71,7 +71,7 @@ function selectProduct() {
 
     if (rowId != null) {
 
-        document.getElementById("product-id").textContent = rowData['id'];
+       // document.getElementById("product-id").textContent = rowData['id'];
         document.getElementById("product-name").textContent = rowData['name'];
         document.getElementById("product-price").textContent = rowData['price'];
         document.getElementById("product-type").textContent = rowData['productType'];
@@ -86,7 +86,7 @@ function acceptProduct() {
     let prodId = document.getElementById("order-product-id").textContent;
     let grid = $("#orderDetails");
     let addRow = {
-        "product.id": document.getElementById("product-id").textContent,
+      //  "product.id": document.getElementById("product-id").textContent,
         "product.name": document.getElementById("product-name").textContent,
         "product.price": document.getElementById("product-price").textContent,
         "product.productType": document.getElementById("product-type").textContent,

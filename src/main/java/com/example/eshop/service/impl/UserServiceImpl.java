@@ -1,6 +1,6 @@
 package com.example.eshop.service.impl;
 
-import com.example.eshop.entity.User;
+import com.example.eshop.mysql.entity.User;
 import com.example.eshop.repository.RoleRepository;
 import com.example.eshop.repository.UserRepository;
 import com.example.eshop.service.UserService;

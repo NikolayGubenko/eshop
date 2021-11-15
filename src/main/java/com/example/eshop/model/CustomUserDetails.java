@@ -1,6 +1,6 @@
 package com.example.eshop.model;
 
-import com.example.eshop.entity.User;
+import com.example.eshop.mysql.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,11 +1,10 @@
 package com.example.eshop.service.impl;
 
-import com.example.eshop.entity.Product;
 import com.example.eshop.exception.Error;
 import com.example.eshop.exception.ShopException;
+import com.example.eshop.mysql.entity.Product;
 import com.example.eshop.repository.ProductRepository;
 import com.example.eshop.service.ProductService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProduct(long productId) throws ShopException {
-        return this.productRepository.findById(productId).orElseThrow(()->new ShopException(Error.PRODUCT_NOT_FOUND));
+        return this.productRepository.findById(productId).orElseThrow(() -> new ShopException(Error.PRODUCT_NOT_FOUND));
     }
 
     @Override
@@ -33,9 +32,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product product, long productId) throws NotFoundException {
+    public Product updateProduct(Product product, long productId) throws ShopException {
         Product updatedProduct = this.productRepository.findById(product.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found"));
+                .orElseThrow(() -> new ShopException(Error.PRODUCT_NOT_FOUND));
 
         updatedProduct.setName(product.getName());
         updatedProduct.setPrice(product.getPrice());

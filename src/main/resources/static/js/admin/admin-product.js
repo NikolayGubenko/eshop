@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $("#allProducts").jqGrid({
-        url: 'http://localhost:8080/api/v1/admin/products',
+        url: 'http://localhost:8080/api/v1/users/products',
         datatype: "json",
         mtype: 'GET',
         jsonReader: {
@@ -12,10 +12,11 @@ $(document).ready(function () {
             repeatitems: false,
             id: "id",
         },
-        colNames: ['id', 'Product name', 'Price', 'Product type'],
+        colNames: ['id', 'Product name', 'Description', 'Price', 'Product type'],
         colModel: [
-            {name: 'id', index: 'id', width: 20},
+            {name: 'id', index: 'id', width: 150},
             {name: 'name', index: 'name', width: 200},
+            {name: 'description', index: 'description', width: 200},
             {name: 'price', index: 'price', width: 175},
             {name: 'productType', index: 'productType', width: 100},
         ],
@@ -50,6 +51,7 @@ function addProduct() {
 
     document.getElementById("product-id").textContent = "";
     document.getElementById("product-name").value = "";
+    document.getElementById("product-description").value = "";
     document.getElementById("product-price").value = 0;
     document.getElementById("product-productType").value = "CPU";
 }
@@ -63,6 +65,7 @@ function editProduct() {
 
         document.getElementById("product-id").textContent = rowId;
         document.getElementById("product-name").value = rowData['name'];
+        document.getElementById("product-description").value = rowData['description'];
         document.getElementById("product-price").value = rowData['price'];
         document.getElementById("product-productType").value = rowData['productType'];
     } else {
@@ -72,14 +75,15 @@ function editProduct() {
 
 function saveProduct() {
     let productId = document.getElementById("product-id").textContent;
-    let jsonData = ({
-        id: productId,
-        name: document.getElementById("product-name").value,
-        price: document.getElementById("product-price").value,
-        productType: document.getElementById("product-productType").value
-    })
 
-    if (productId) {
+    if (productId !== "") {
+        let jsonData = ({
+            id: productId,
+            name: document.getElementById("product-name").value,
+            description: document.getElementById("product-description").value,
+            price: document.getElementById("product-price").value,
+            productType: document.getElementById("product-productType").value
+        })
         $.ajax({
             type: "PUT",
             url: "http://localhost:8080/api/v1/admin/products/" + productId,
@@ -89,12 +93,19 @@ function saveProduct() {
             success: function () {
                 document.getElementById("editProductPanel").hidden = true;
                 $("[data-toggle='popover']").popover('destroy');
+                jQuery("#allProducts").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/products"}).trigger("reloadGrid");
             },
             error: function (errorObj) {
                 showProductErrors(errorObj);
             },
         });
     } else {
+        let jsonData = ({
+            name: document.getElementById("product-name").value,
+            description: document.getElementById("product-description").value,
+            price: document.getElementById("product-price").value,
+            productType: document.getElementById("product-productType").value
+        })
         $.ajax({
             type: "POST",
             url: "http://localhost:8080/api/v1/admin/products/",
@@ -103,6 +114,7 @@ function saveProduct() {
             success: function () {
                 document.getElementById("editProductPanel").hidden = true;
                 $("[data-toggle='popover']").popover('destroy');
+                jQuery("#allProducts").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/products"}).trigger("reloadGrid");
             },
             error: function (errorObj) {
                 showProductErrors(errorObj);
@@ -116,6 +128,9 @@ function deleteProduct() {
     $.ajax({
         type: "DELETE",
         url: "http://localhost:8080/api/v1/admin/products/" + rowId,
+        success: function () {
+            jQuery("#allProducts").jqGrid('setGridParam', {url: "http://localhost:8080/api/v1/users/products"}).trigger("reloadGrid");
+        }
     });
 
 }

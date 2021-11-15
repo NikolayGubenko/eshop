@@ -1,7 +1,7 @@
 package com.example.eshop.mapper;
 
 import com.example.eshop.dto.OrderProductDTO;
-import com.example.eshop.entity.OrderProduct;
+import com.example.eshop.mysql.entity.OrderProduct;
 import org.mapstruct.Mapper;
 
 import java.util.Set;

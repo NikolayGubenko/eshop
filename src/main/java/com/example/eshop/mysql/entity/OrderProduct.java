@@ -1,4 +1,4 @@
-package com.example.eshop.entity;
+package com.example.eshop.mysql.entity;
 
 import lombok.*;
 
@@ -17,7 +17,7 @@ public class OrderProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 

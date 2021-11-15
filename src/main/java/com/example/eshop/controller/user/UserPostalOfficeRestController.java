@@ -2,7 +2,7 @@ package com.example.eshop.controller.user;
 
 import com.example.eshop.dto.PageResponseDTO;
 import com.example.eshop.dto.PostalOfficeDTO;
-import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.mysql.entity.PostalOffice;
 import com.example.eshop.mapper.PostalOfficeMapper;
 import com.example.eshop.service.PostalOfficeService;
 import lombok.RequiredArgsConstructor;

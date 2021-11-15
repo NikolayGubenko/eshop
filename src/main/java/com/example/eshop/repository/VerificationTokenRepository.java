@@ -1,6 +1,6 @@
 package com.example.eshop.repository;
 
-import com.example.eshop.entity.VerificationToken;
+import com.example.eshop.mysql.entity.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

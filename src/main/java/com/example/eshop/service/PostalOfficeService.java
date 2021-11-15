@@ -1,6 +1,6 @@
 package com.example.eshop.service;
 
-import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.mysql.entity.PostalOffice;
 import com.example.eshop.exception.ShopException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

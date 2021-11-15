@@ -1,6 +1,6 @@
 package com.example.eshop.service;
 
-import com.example.eshop.entity.Order;
+import com.example.eshop.mysql.entity.Order;
 import com.example.eshop.exception.ShopException;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;

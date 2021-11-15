@@ -1,6 +1,6 @@
 package com.example.eshop.service.impl;
 
-import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.mysql.entity.PostalOffice;
 import com.example.eshop.exception.Error;
 import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.PostalOfficeRepository;

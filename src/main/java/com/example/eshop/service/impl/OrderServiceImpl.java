@@ -1,6 +1,6 @@
 package com.example.eshop.service.impl;
 
-import com.example.eshop.entity.Order;
+import com.example.eshop.mysql.entity.Order;
 import com.example.eshop.exception.Error;
 import com.example.eshop.exception.ShopException;
 import com.example.eshop.repository.OrderRepository;

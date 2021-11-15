@@ -1,6 +1,6 @@
 package com.example.eshop.service.impl;
 
-import com.example.eshop.entity.VerificationToken;
+import com.example.eshop.mysql.entity.VerificationToken;
 import com.example.eshop.repository.VerificationTokenRepository;
 import com.example.eshop.service.VerificationTokenService;
 import lombok.RequiredArgsConstructor;

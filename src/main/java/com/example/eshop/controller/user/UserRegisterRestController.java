@@ -1,8 +1,8 @@
 package com.example.eshop.controller.user;
 
 import com.example.eshop.dto.UserDTO;
-import com.example.eshop.entity.User;
-import com.example.eshop.entity.VerificationToken;
+import com.example.eshop.mysql.entity.User;
+import com.example.eshop.mysql.entity.VerificationToken;
 import com.example.eshop.exception.Error;
 import com.example.eshop.exception.ShopException;
 import com.example.eshop.mapper.UserMapper;

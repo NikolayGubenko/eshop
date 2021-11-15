@@ -1,6 +1,6 @@
 package com.example.eshop.service;
 
-import com.example.eshop.entity.User;
+import com.example.eshop.mysql.entity.User;
 import org.springframework.mail.SimpleMailMessage;
 
 public interface EmailService {

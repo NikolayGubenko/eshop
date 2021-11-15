@@ -1,6 +1,6 @@
 package com.example.eshop.dto;
 
-import com.example.eshop.entity.PostalOffice;
+import com.example.eshop.mysql.entity.PostalOffice;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 

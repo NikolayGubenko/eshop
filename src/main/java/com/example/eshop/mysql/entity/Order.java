@@ -1,7 +1,7 @@
-package com.example.eshop.entity;
+package com.example.eshop.mysql.entity;
 
 
-import com.example.eshop.entity.enums.OrderStatus;
+import com.example.eshop.enums.OrderStatus;
 import lombok.*;
 
 import javax.persistence.*;

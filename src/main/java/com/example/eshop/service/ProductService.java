@@ -1,8 +1,7 @@
 package com.example.eshop.service;
 
-import com.example.eshop.entity.Product;
 import com.example.eshop.exception.ShopException;
-import javassist.NotFoundException;
+import com.example.eshop.mysql.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,7 +13,7 @@ public interface ProductService {
 
     Product saveProduct(Product product);
 
-    Product updateProduct(Product product, long productId) throws NotFoundException;
+    Product updateProduct(Product product, long productId) throws ShopException;
 
     void deleteProduct(long productId);
 

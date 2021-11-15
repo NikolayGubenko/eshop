@@ -1,6 +1,6 @@
 package com.example.eshop.service.impl;
 
-import com.example.eshop.entity.User;
+import com.example.eshop.mysql.entity.User;
 import com.example.eshop.model.CustomUserDetails;
 import com.example.eshop.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
