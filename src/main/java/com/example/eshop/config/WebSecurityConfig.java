@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/js/**","/api/v1/admin/products/csv-upload/**");
-        web.ignoring().antMatchers("/api/v1/users/register/confirm");
+        web.ignoring().antMatchers("/api/v1/users/register/confirm","/api/v1/streams/**");
     }
 
 }
